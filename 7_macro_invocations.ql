@@ -7,9 +7,9 @@ import cpp
 //     func.getName() = "memcpy"
 // select mi
 
-// from MacroInvocation mi
-// where mi.getTarget().getName() in  ["ntohs","ntohl","ntohll"]
-// select mi  //使用集合表达式
+from MacroInvocation mi
+where mi.getMacro().getName() in  ["ntohs","ntohl","ntohll"]
+select mi  //使用集合表达式
 
 
 
@@ -20,7 +20,7 @@ import cpp
 // select mi  //使用集合表达式
 
 
-from MacroInvocation mi
-where mi.getMacro().getName().regexpMatch("ntoh(s|l|ll)")
-select mi
+// from MacroInvocation mi
+// where mi.getMacro().getName().regexpMatch("ntoh(s|l|ll)")
+// select mi
 
