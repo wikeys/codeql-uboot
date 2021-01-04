@@ -23,8 +23,7 @@ class Config extends TaintTracking::Configuration {
   override predicate isSink(DataFlow::Node sink) {  //污点的去处，去memcpy
     exists(FunctionCall call |
       call.getTarget().getName() = "memcpy"  //判断是否去处为memcpy
-      and sink.asExpr() = call.getArgument(2) //且去处是否为第三个参数
-      and not call.getArgument(1).isConstant()//同时判断memcpy第二个参数是否为常数
+      //and sink.asExpr() = call.getArgument(2) //且去处是否为第三个参数
     )
   }
 }
@@ -32,3 +31,5 @@ class Config extends TaintTracking::Configuration {
 from Config cfg, DataFlow::PathNode source, DataFlow::PathNode sink
 where cfg.hasFlowPath(source, sink)//开始执行
 select sink, source, sink, "Network byte swap flows to memcpy"
+
+
